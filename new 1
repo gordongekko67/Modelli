@@ -1,0 +1,17 @@
+
+        public static void ScheduledUpdate()
+        {
+            int sleepfor = Properties.Settings.Default.updateInterval;
+
+            if ((sleepfor < 9000000) || (sleepfor > 86400000))
+            {
+                log.Warn("Set update values between 15 minutes and 1 day");
+                sleepfor = 3600000; //Update every hour
+            }
+
+            while (true)
+            {
+                Thread.Sleep(sleepfor);
+                FilesUpdate(false);
+            }
+        }
